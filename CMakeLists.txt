@@ -1,12 +1,81 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 project(fysics LANGUAGES C)
 
-#global settings
+#C standard
 set(CMAKE_C_STANDARD 99)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -g")
+set(CMAKE_C_STANDARD_REQUIRED ON)
+
+#compiler flags
+set(CMAKE_C_FLAGS_DEBUG "-g -O2 -Wall -Wextra")
+set(CMAKE_C_FLAGS_RELEASE "-O3 -DddNDEBUG")
+
+#default debug
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug)
+endif()
+
+#external libs
+find_package(PkgConfig REQUIRED)
+
+# SDL2
+pkg_check_modules(SDL2 REQUIRED sdl2)
+
+# OpenGL 
+find_package(OpenGL REQUIRED)
+
+#physics engine lib
+#src files
+file(GLOB_RECURSE PHYSICS_SOURCES 
+    "src/collision/*.c"
+    "src/core/*.c"
+    "src/dynamics/*.c"
+    "src/math/*.c"
+)
+#header files
+file(GLOB_RECURSE PHYSICS_HEADERS 
+    "include/physics/*.h"
+)
+
+#create main physics lib
+add_library(fysics_engine STATIC ${PHYSICS_SOURCES} ${PHYSICS_HEADERS})
+
+#add include dirs
+target_include_directories(fysics_engine PUBLIC 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${SDL2_INCLUDE_DIRS}
+)
+
+#link libraries to physics engine
+target_link_libraries(fysics_engine PUBLIC
+    ${SDL2_LIBRARIES}
+    ${OPENGL_LIBRARIES}
+)
 
 
-#subdirectories
-add_subdirectory(external)
-add_subdirectory(src)
-add_subdirectory(tests)
+#compiler flags
+target_compile_options(fysics_engine PRIVATE ${SDL2_CFLAGS_OTHER})
+
+
+
+#examples
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/examples/basic/main.c")
+    add_executable(basic_example examples/basic/main.c)
+    target_link_libraries(basic_example PRIVATE fysics_engine)
+    
+    #output directory
+    set_target_properties(basic_example PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/examples"
+    )
+endif()
+
+
+
+message(STATUS "")
+message(STATUS "=== Fysics Physics Engine Configuration ===")
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "C Compiler: ${CMAKE_C_COMPILER}")
+message(STATUS "SDL2 found: ${SDL2_FOUND}")
+message(STATUS "OpenGL found: ${OPENGL_FOUND}")
+message(STATUS "Source files found: ${PHYSICS_SOURCES}")
+message(STATUS "==========================================")
+message(STATUS "")
