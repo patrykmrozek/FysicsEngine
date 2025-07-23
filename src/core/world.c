@@ -26,7 +26,13 @@ fyWorld* fy_world_create(const fyWorldConfig* config) {
 }
 
 void fy_world_destroy(fyWorld* world) {
+    if (!world) return;
 
+    if (world->bodies) {
+        free(world->bodies);
+    }
+    free(world);
+    return;
 }
 
 void fy_world_add_body(fyBody* body) {

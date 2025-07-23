@@ -22,7 +22,7 @@ find_package(OpenGL REQUIRED)
 
 #physics engine lib
 #src files
-file(GLOB_RECURSE PHYSICS_SOURCES 
+file(GLOB PHYSICS_SOURCES 
     src/core/body.c
     src/core/world.c
     src/utils/vector2.c
