@@ -29,7 +29,6 @@ file(GLOB_RECURSE PHYSICS_SOURCES
     "src/collision/*.c"
     "src/core/*.c"
     "src/dynamics/*.c"
-    "src/math/*.c"
 )
 #header files
 file(GLOB_RECURSE PHYSICS_HEADERS 
