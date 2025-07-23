@@ -1,0 +1,12 @@
+[submodule "external/nuklear"]
+	path = external/nuklear
+	url = https://github.com/Immediate-Mode-UI/Nuklear.git
+[submodule "external/cglm"]
+	path = external/cglm
+	url = https://github.com/recp/cglm.git
+[submodule "external/glad"]
+	path = external/glad
+	url = https://github.com/Dav1dde/glad.git
+[submodule "external/sdl2"]
+	path = external/sdl2
+	url = https://github.com/libsdl-org/SDL.git
