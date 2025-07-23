@@ -1,15 +1,15 @@
 #include <stdio.h>
-#include <cglm/cglm.h>
-#include <cglm/struct.h>
+#include "physics/utils/vector2.h"
+
 
 int main() {
     //testing the vector2 functions
     
-    vec2s a = {100, 50};
-    vec2s b = {75, 20};
-    vec2s c = glms_vec2_add(a, b);
-    vec2s d = glms_vec2_sub(a, b);
-    vec2s e = glms_vec2_scale(a, 5);
+    fyVec2 a = {100, 50};
+    fyVec2 b = {75, 20};
+    fyVec2 c = vec2_add(a, b);
+    fyVec2 d = vec2_sub(a, b);
+    fyVec2 e = vec2_scale(a, 5);
 
     printf("Addition: %f, %f\n", c.x, c.y);
     printf("Subtraction: %f, %f\n", d.x, d.y);

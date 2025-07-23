@@ -4,6 +4,7 @@ project(fysics LANGUAGES C)
 #C standard
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
 
 #compiler flags
 set(CMAKE_C_FLAGS_DEBUG "-g -O2 -Wall -Wextra")
@@ -16,31 +17,24 @@ endif()
 
 #external libs
 find_package(PkgConfig REQUIRED)
-
-# SDL2
 pkg_check_modules(SDL2 REQUIRED sdl2)
-
-# OpenGL 
 find_package(OpenGL REQUIRED)
 
 #physics engine lib
 #src files
 file(GLOB_RECURSE PHYSICS_SOURCES 
-    "src/collision/*.c"
-    "src/core/*.c"
-    "src/dynamics/*.c"
-)
-#header files
-file(GLOB_RECURSE PHYSICS_HEADERS 
-    "include/physics/*.h"
+    src/core/body.c
+    src/core/world.c
+    src/utils/vector2.c
 )
 
 #create main physics lib
-add_library(fysics_engine STATIC ${PHYSICS_SOURCES} ${PHYSICS_HEADERS})
+add_library(fysics_engine STATIC ${PHYSICS_SOURCES})
 
 #add include dirs
 target_include_directories(fysics_engine PUBLIC 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
     ${SDL2_INCLUDE_DIRS}
 )
 
@@ -50,23 +44,19 @@ target_link_libraries(fysics_engine PUBLIC
     ${OPENGL_LIBRARIES}
 )
 
-
 #compiler flags
 target_compile_options(fysics_engine PRIVATE ${SDL2_CFLAGS_OTHER})
-
 
 
 #examples
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/examples/basic/main.c")
     add_executable(basic_example examples/basic/main.c)
     target_link_libraries(basic_example PRIVATE fysics_engine)
-    
     #output directory
     set_target_properties(basic_example PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/examples"
     )
 endif()
-
 
 
 message(STATUS "")
