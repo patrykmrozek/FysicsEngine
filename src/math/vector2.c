@@ -1,4 +1,4 @@
-#include "physics/utils/vector2.h"
+#include <physics/math/vector2.h>
 
 fyVec2 vec2_add(fyVec2 v1, fyVec2 v2) {
     return (fyVec2){v1.x + v2.x, v1.y + v2.y};

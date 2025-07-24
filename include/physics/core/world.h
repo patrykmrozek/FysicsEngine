@@ -2,12 +2,12 @@
 #define FY_WORLD_H
 
 #include <stddef.h>
-#include "physics/utils/vector2.h"
-#include "physics/core/body.h"
+#include <physics/math/vector2.h>
+#include <physics/core/body.h>
 
 typedef struct fyWorld{
     struct { 
-        fyBody* bodies; //objects[x][y]
+        fyBody* bodies; //objects[x]
         int max_bodies;
         int body_count;
     }; 

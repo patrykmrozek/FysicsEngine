@@ -1,5 +1,4 @@
-#include "physics/core/body.h"
-#include "physics/utils/vector2.h"
+#include <physics/core/body.h>
 
 void fy_body_set_position(fyBody* body, float x, float y) {
     body->position = (fyVec2){x, y};

@@ -25,7 +25,7 @@ find_package(OpenGL REQUIRED)
 file(GLOB PHYSICS_SOURCES 
     src/core/body.c
     src/core/world.c
-    src/utils/vector2.c
+    src/math/vector2.c
 )
 
 #create main physics lib
