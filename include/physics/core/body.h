@@ -9,7 +9,7 @@ typedef struct fyBody {
     fyVec2 position;
     fyVec2 velocity;
     float mass;
-    bool is_active
+    bool is_active;
 } fyBody;
 
 

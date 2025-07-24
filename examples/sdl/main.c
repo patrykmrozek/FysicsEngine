@@ -30,10 +30,13 @@ int main() {
     }
     
     //world init
-    fyWorldConfig config = {5, 0, {0, 9.8f}};
-    fyWorld* world = fy_WorldCreate(&config);
-    fyBody* body = fy_WorldCreateBody(world, 10.0f);
-    fy_BodySetPosition(body, 100.0f, 100.0f);
+    fyWorldConfig config;
+    config.max_bodies = 5;
+    config.body_count = 0;
+    config.gravity = (fyVec2){0.0f, 9.8f};
+    fyWorld* world = fyWorld_Create(&config);
+    fyBody* body = fyWorld_CreateBody(world, 10.0f);
+    fyBody_SetPosition(body, 100.0f, 100.0f);
 
     //SDL_Rect using fyBody info
 
@@ -55,9 +58,9 @@ int main() {
             }
         }
         
-        fy_WorldStep(world, delta_time);
+        fyWorld_Step(world, delta_time);
 
-        fyVec2 body_pos = fy_BodyGetPosition(body);
+        fyVec2 body_pos = fyBody_GetPosition(body);
         SDL_Rect rect = {body_pos.x, body_pos.y , 50, 50};
     
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -70,7 +73,7 @@ int main() {
 
     }
 
-    fy_WorldDestroy(world);
+    fyWorld_Destroy(world);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
