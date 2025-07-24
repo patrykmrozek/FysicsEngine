@@ -1,6 +1,7 @@
 #ifndef FYSICS_H
 #define FYSICS_H
 
+#include <stdio.h>
 #include <stddef.h>
 #include <stdbool.h>
 #include <physics/math/vector2.h>

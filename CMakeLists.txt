@@ -49,6 +49,7 @@ target_compile_options(fysics_engine PRIVATE ${SDL2_CFLAGS_OTHER})
 
 
 #examples
+
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/examples/basic/main.c")
     add_executable(basic_example examples/basic/main.c)
     target_link_libraries(basic_example PRIVATE fysics_engine)
@@ -58,7 +59,18 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/examples/basic/main.c")
     )
 endif()
 
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/examples/sdl/main.c")
+    add_executable(sdl_example examples/sdl/main.c)
+    target_link_libraries(sdl_example PRIVATE fysics_engine)
+    #output directory
+    set_target_properties(sdl_example PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/examples"
+    )
+endif()
 
+
+
+ 
 message(STATUS "")
 message(STATUS "=== Fysics Physics Engine Configuration ===")
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
