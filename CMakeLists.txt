@@ -61,7 +61,7 @@ endif()
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/examples/sdl/main.c")
     add_executable(sdl_example examples/sdl/main.c)
-    target_link_libraries(sdl_example PRIVATE fysics_engine)
+    target_link_libraries(sdl_example PRIVATE fysics_engine SDL2)
     #output directory
     set_target_properties(sdl_example PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/examples"

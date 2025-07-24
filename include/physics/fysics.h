@@ -15,12 +15,12 @@ typedef struct fyWorldConfig {
     fyVec2 gravity;
 } fyWorldConfig;
 
-fyWorld* fy_world_create(const struct fyWorldConfig* config);
-void fy_world_destroy(fyWorld* world);
-void fy_world_step(fyWorld* world, float delta_time);
-fyBody* fy_world_create_body(fyWorld* world, float mass);
-void fy_body_set_position(fyBody* body, float x, float y);
-fyVec2 fy_body_get_position(fyBody* body);
+fyWorld* fy_WorldCreate(const struct fyWorldConfig* config);
+void fy_WorldDestroy(fyWorld* world);
+void fy_WorldStep(fyWorld* world, float delta_time);
+fyBody* fy_WorldCreateBody(fyWorld* world, float mass);
+void fy_BodySetPosition(fyBody* body, float x, float y);
+fyVec2 fy_BodyGetPosition(fyBody* body);
 
 
 

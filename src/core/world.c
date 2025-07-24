@@ -5,7 +5,7 @@
 #include <physics/core/body.h>
 #include <physics/fysics.h>
 
-fyWorld* fy_world_create(const fyWorldConfig* config) {
+fyWorld* fy_WorldCreate(const fyWorldConfig* config) {
     fyWorld* world = malloc(sizeof(fyWorld));
     if (!world) {
         printf("world creation malloc failed!\n");
@@ -27,7 +27,7 @@ fyWorld* fy_world_create(const fyWorldConfig* config) {
     return world;
 }
 
-void fy_world_destroy(fyWorld* world) {
+void fy_WorldDestroy(fyWorld* world) {
     if (!world) return;
 
     if (world->bodies) {
@@ -37,7 +37,7 @@ void fy_world_destroy(fyWorld* world) {
     return;
 }
 
-fyBody* fy_world_create_body(fyWorld* world, float mass) {
+fyBody* fy_WorldCreateBody(fyWorld* world, float mass) {
     for (int i = 0; i < world->max_bodies; i++) {
         fyBody* body = &world->bodies[i];
         if (!body[i].is_active) {
@@ -53,7 +53,7 @@ fyBody* fy_world_create_body(fyWorld* world, float mass) {
 }
 
 
-void fy_world_step(fyWorld* world, float delta_time) {\
+void fy_WorldStep(fyWorld* world, float delta_time) {\
     for (int i = 0; i < world->max_bodies; i++) {
         fyBody* body = &world->bodies[i];
         if (body->is_active) {
