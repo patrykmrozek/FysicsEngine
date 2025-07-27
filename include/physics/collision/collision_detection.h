@@ -1,7 +1,8 @@
 #ifndef FY_COLLISION_DETECTION_H
 #define FY_COLLISION_DETECTION_H
 
-#include <physics/core/body.h>
+#include <stdbool.h>
+#include <physics/math/vector2.h>
 
 typedef struct {
     fyVec2 normal;
@@ -15,11 +16,8 @@ typedef struct fyAABB {
 } fyAABB;
 
 //AABB functions
-bool fyAABB_TestOverlap(fyBody* a, fyBody* b);
+bool fyAABB_TestOverlap(fyAABB a, fyAABB b);
 fyAABB fyAABB_Circle(fyVec2 center, float radius);
 fyAABB fyAABB_Rectangle(fyVec2 center, float width, float height);
-
-//collision functions
-void fyCollision_Resolve(fyBody* a, fyBody* b,  fyCollision* collision);
 
 #endif

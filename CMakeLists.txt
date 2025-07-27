@@ -26,6 +26,8 @@ file(GLOB PHYSICS_SOURCES
     src/core/body.c
     src/core/world.c
     src/math/vector2.c
+    src/collision/collision_detection.c
+    src/collision/shape.c
 )
 
 #create main physics lib
