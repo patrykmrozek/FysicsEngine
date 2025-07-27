@@ -35,9 +35,11 @@ int main() {
     fyWorld* world = fyWorld_Create(&config);
     fyBody* body = fyWorld_CreateBody(world, 10.0f);
     fyBody_SetPosition(body, 100.0f, 100.0f);
-
-
+    
+    const float FIXED_DT = 1.0f / 60.0f; //fixed to 60fps
+    float accumulator = 0.0f;
     Uint32 prev_time = SDL_GetTicks();
+
     SDL_RaiseWindow(window);
     SDL_PumpEvents();
     SDL_Event event;
@@ -45,7 +47,7 @@ int main() {
     while (running) {
         //delta time
         Uint32 curr_time = SDL_GetTicks();
-        float delta_time = (curr_time - prev_time) / 1000.0f;
+        accumulator += (curr_time - prev_time) / 1000.0f;
         prev_time = curr_time;
 
 
@@ -55,9 +57,13 @@ int main() {
             }
         }
         
-        fyWorld_Step(world, delta_time);
+        while (accumulator >= FIXED_DT) {
+            fyWorld_Step(world, FIXED_DT);
+            accumulator -= FIXED_DT;
+        }
 
         //SDL_Rect using fyBody info
+        fyBody_AddForce(body, 100.0f, 0.0f);
         fyVec2 body_pos = fyBody_GetPosition(body);
         SDL_Rect rect = {body_pos.x, body_pos.y , 50, 50};
     

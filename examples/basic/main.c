@@ -37,7 +37,7 @@ int main() {
     // ===========================
 
     fyBody* body1 = fyWorld_CreateBody(world, 10.0f);
-    fyBody* body2 = fyWorld_CreateBody(world, 5.0f);
+    fyBody* body2 = fyWorld_CreateBody(world, 10000.0f);
 
     fyBody_SetPosition(body1, 100.0f, 100.0f);
     fyBody_SetPosition(body2, 150.0f, 50.0f);
@@ -46,10 +46,16 @@ int main() {
     fyVec2 body2_pos_init = fyBody_GetPosition(body2);
     printf("Body 1 Initial Position: {%f, %f}\n", body1_pos_init.x, body1_pos_init.y);
     printf("Body 2 Initial Position: {%f, %f}\n", body2_pos_init.x, body2_pos_init.y);
-
+    
     //simulating 1 second at 60 fps
     for (int i = 0; i < 60; i++) {
         fyWorld_Step(world, 1.0f / 60.0f);
+        if (i == 59) {
+            fyVec2 vel1 = fyBody_GetVelocity(body1);
+            fyVec2 vel2 = fyBody_GetVelocity(body2);
+            printf("body 1 final Y velocity: %f\n", vel1.y);
+            printf("body 2 final Y velocity: %f\n", vel2.y); 
+        }
     }
     //body's x position should remain the same,
     //while the y position should be altered due to gravity

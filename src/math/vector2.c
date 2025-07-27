@@ -8,6 +8,14 @@ fyVec2 vec2_sub(fyVec2 v1, fyVec2 v2) {
     return (fyVec2){v1.x - v2.x, v1.y - v2.y};
 }
 
+fyVec2 vec2_mul(fyVec2 v1, fyVec2 v2) {
+    return (fyVec2){v1.x * v2.x, v1.y * v2.y};
+}
+
+fyVec2 vec2_div(fyVec2 v1, fyVec2 v2) {
+    return (fyVec2){v1.x / v2.x, v1.y / v2.y};
+} 
+
 fyVec2 vec2_scale(fyVec2 v, float f) {
     return (fyVec2){v.x * f, v.y * f};
 }

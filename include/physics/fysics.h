@@ -22,6 +22,8 @@ fyBody* fyWorld_CreateBody(fyWorld* world, float mass);
 //fyBody API
 void fyBody_SetPosition(fyBody* body, float x, float y);
 fyVec2 fyBody_GetPosition(fyBody* body);
+fyVec2 fyBody_GetVelocity(fyBody* body);
+void fyBody_AddForce(fyBody* body, float x, float y);
 
 
 
