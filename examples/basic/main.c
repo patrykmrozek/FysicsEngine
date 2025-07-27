@@ -16,7 +16,7 @@ int main() {
 
     // ===========================
 
-    fyWorldConfig config = {5, {0, -9.8f}};
+    fyWorldConfig config = {5};
     fyWorld* world = fyWorld_Create(&config);
     if (!world) {
         printf("Error creating world\n");

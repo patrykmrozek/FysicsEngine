@@ -22,7 +22,7 @@ fyWorld* fyWorld_Create(const fyWorldConfig* config) {
 
     world->max_bodies = config->max_bodies;
     world->body_count = 0;
-    world->gravity = config->gravity;
+    world->gravity = (fyVec2){0, 9.8f};
 
     return world;
 }
@@ -52,17 +52,24 @@ fyBody* fyWorld_CreateBody(fyWorld* world, float mass) {
     return NULL;
 }
 
-
 void fyWorld_Step(fyWorld* world, float delta_time) {\
     for (int i = 0; i < world->max_bodies; i++) {
         fyBody* body = &world->bodies[i];
         if (body->is_active) {
+            //equivalent to force += mass * gravity
+            body->force = vec2_add(body->force,
+                          vec2_scale(world->gravity, body->mass));
+            //printf("FORCE: %f, %f\n", body->force.x, body->force.y);
 
-            body->velocity.x += world->gravity.x * delta_time;
-            body->velocity.y += world->gravity.y * delta_time;
-
-            body->position.x += body->velocity.x * delta_time;
-            body->position.y += body->velocity.y * delta_time;
+            //equivalent to velocity += force / (mass * deltaTime)
+            body->velocity = vec2_add(body->velocity,
+                             vec2_scale(body->force, (body->mass * delta_time)));
+            //printf("VELOCITY: %f, %f\n", body->velocity.x, body->velocity.y);
+            body->position = vec2_add(body->position,
+                                      vec2_scale(body->velocity, delta_time));
+            //printf("POSITION: %f, %f\n", body->position.x, body->position.y);
+            
+            body->force = (fyVec2){0, 0}; //reset net force
         }
     }
 }

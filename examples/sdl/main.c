@@ -32,12 +32,10 @@ int main() {
     //world init
     fyWorldConfig config;
     config.max_bodies = 5;
-    config.gravity = (fyVec2){0.0f, 9.8f};
     fyWorld* world = fyWorld_Create(&config);
     fyBody* body = fyWorld_CreateBody(world, 10.0f);
     fyBody_SetPosition(body, 100.0f, 100.0f);
 
-    //SDL_Rect using fyBody info
 
     Uint32 prev_time = SDL_GetTicks();
     SDL_RaiseWindow(window);
@@ -59,6 +57,7 @@ int main() {
         
         fyWorld_Step(world, delta_time);
 
+        //SDL_Rect using fyBody info
         fyVec2 body_pos = fyBody_GetPosition(body);
         SDL_Rect rect = {body_pos.x, body_pos.y , 50, 50};
     
