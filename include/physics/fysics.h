@@ -24,6 +24,8 @@ void fyBody_SetPosition(fyBody* body, float x, float y);
 fyVec2 fyBody_GetPosition(fyBody* body);
 fyVec2 fyBody_GetVelocity(fyBody* body);
 void fyBody_AddForce(fyBody* body, float x, float y);
+void fyBody_SetCircleCollider(fyBody* body, float radius);
+void fyBody_SetRectangleCollider(fyBody* body, float width, float height);
 
 
 

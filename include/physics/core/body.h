@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <physics/math/vector2.h>
+#include <physics/collision/shape.h>
 
 
 typedef struct fyBody {
@@ -10,6 +11,8 @@ typedef struct fyBody {
     fyVec2 velocity;
     fyVec2 force;
     float mass;
+    
+    fyShape shape;
     bool is_active;
 } fyBody;
 
