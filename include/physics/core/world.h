@@ -6,11 +6,9 @@
 #include <physics/core/body.h>
 
 typedef struct fyWorld{
-    struct { 
-        fyBody* bodies; //objects[x]
-        int max_bodies;
-        int body_count;
-    }; 
+    fyBody* bodies; //bodies[x]
+    int max_bodies;
+    int body_count;
     fyVec2 gravity;;
 } fyWorld;
 

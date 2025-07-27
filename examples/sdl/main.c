@@ -32,7 +32,6 @@ int main() {
     //world init
     fyWorldConfig config;
     config.max_bodies = 5;
-    config.body_count = 0;
     config.gravity = (fyVec2){0.0f, 9.8f};
     fyWorld* world = fyWorld_Create(&config);
     fyBody* body = fyWorld_CreateBody(world, 10.0f);

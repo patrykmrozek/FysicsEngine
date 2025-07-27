@@ -11,7 +11,6 @@ typedef struct fyBody fyBody;
 
 typedef struct fyWorldConfig {
     int max_bodies;
-    int body_count;
     fyVec2 gravity;
 } fyWorldConfig;
 
