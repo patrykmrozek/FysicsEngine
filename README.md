@@ -19,6 +19,7 @@ Visual examples made with SDL.
 ## TODO 
 - [ ] Rectangle vs Rectangle & Rectangle vs Circle collision detection
 - [ ] Collision resolution and response
+- [ ] Rotations and angular velocity
 - [ ] Constraint system
 - [ ] Friction, restitution ...
 - [ ] Smooth Step system 

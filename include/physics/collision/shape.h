@@ -2,7 +2,6 @@
 #define FY_SHAPE_H
 
 #include <physics/math/vector2.h>
-#include <physics/collision/aabb.h>
 
 
 typedef enum {

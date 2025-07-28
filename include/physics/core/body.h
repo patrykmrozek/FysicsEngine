@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <physics/math/vector2.h>
+#include <physics/collision/aabb.h>
 #include <physics/collision/shape.h>
 
 
