@@ -12,7 +12,7 @@ int main() {
     SDL_Init(SDL_INIT_VIDEO);
 
     SDL_Window* window = SDL_CreateWindow(
-        "TEST - circlevscircle",
+        "TEST - rectvsrect",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         SCREEN_WIDTH,
@@ -32,33 +32,22 @@ int main() {
         return 1;
     }
 
-    //world setup
     fyWorldConfig config;
     config.max_bodies = 2;
     fyWorld* world = fyWorld_Create(&config);
     fyBody* body_c = fyWorld_CreateBody(world, 50.0f);
     fyBody* body_r = fyWorld_CreateBody(world, 90.0f);
     
-    //setting up 'circle' body
     fyBody_SetPosition(body_c, 200.0f, 200.0f);
     float const WIDTH1 = 200.0f;
     float const HEIGHT1 = 300.0f;
     fyBody_SetRectangleCollider(body_c, WIDTH1, HEIGHT1);
     
-    //setting up 'rectangle' body
     fyBody_SetPosition(body_r, 500.0f, 100.0f);
     float const WIDTH2 = 100.0f;
     float const HEIGHT2 = 400.0f;
     fyBody_SetRectangleCollider(body_r, WIDTH2, HEIGHT2);
    
-    /*
-    fyVec2 bcp = fyBody_GetPosition(body_c);
-    printf("body_c pointer: %p\n\tposition: %f, %f\n", body_c, bcp.x, bcp.y);
-
-    fyVec2 brp = fyBody_GetPosition(body_r); 
-    printf("body_r pointer: %p\n\tposition: %f, %f\n", body_r, brp.x, brp.y);
-*/
-
     const float FIXED_DT = 1.0f / 60.0f;
     float accumulator = 0.0f;
     Uint32 prev_time = SDL_GetTicks();
@@ -106,12 +95,8 @@ int main() {
         };
 
         
-        //clear
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
-        //draw rects
-        //drawing rectangle instead of circle because the AABB is just a rect 
-        //encompassing a circle
         fyCollisionInfo info;
         if (fyCollision_RectVsRect(body_c, body_r, &info)) {
             SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);

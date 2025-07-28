@@ -13,6 +13,7 @@ typedef struct {
 
 bool fyCollision_CircleVsCircle(fyBody* a, fyBody* b, fyCollisionInfo* output);
 bool fyCollision_RectVsRect(fyBody* a, fyBody* b, fyCollisionInfo* output);
+bool fyCollision_CircleVsRect(fyBody* circle, fyBody* rect, fyCollisionInfo* info);
 
 
 #endif

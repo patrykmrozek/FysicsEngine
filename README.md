@@ -16,8 +16,9 @@ Visual examples made with SDL.
 ### Circle VS Circle Collision Test
 
 ![AABB Collision Test Demo](https://raw.githubusercontent.com/patrykmrozek/FysicsEngine/main/docs/static/videos/circlevscircle_test.gif)
-## TODO 
+## TODO
 - [ ] Rectangle vs Rectangle & Rectangle vs Circle collision detection
+- [ ] Update info in fyCollisionInfo
 - [ ] Collision resolution and response
 - [ ] Rotations and angular velocity
 - [ ] Constraint system
