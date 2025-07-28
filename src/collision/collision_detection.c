@@ -22,8 +22,8 @@ bool fyCollision_RectVsRect(fyBody* a, fyBody* b, fyCollisionInfo* output) {
 bool fyCollision_CircleVsRect(fyBody* circle, fyBody* rect, fyCollisionInfo* info) {
     fyAABB aabb_rect = fyBody_GetAABB(rect);
     //project the circle center onto rectangle, finding nearest point
-    float closest_x = clamp(circle->position.x, aabb_rect.min.x, aabb_rect.max.x);
-    float closest_y = clamp(circle->position.y, aabb_rect.min.y, aabb_rect.max.y);
+    float closest_x = fyMath_Clamp(circle->position.x, aabb_rect.min.x, aabb_rect.max.x);
+    float closest_y = fyMath_Clamp(circle->position.y, aabb_rect.min.y, aabb_rect.max.y);
 
     float dist = fyVec2_Dist(circle->position, (fyVec2){closest_x, closest_y});
 

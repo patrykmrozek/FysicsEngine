@@ -26,6 +26,7 @@ file(GLOB PHYSICS_SOURCES
     src/core/body.c
     src/core/world.c
     src/math/vector2.c
+    src/math/math.c
     src/collision/collision_detection.c
     src/collision/aabb.c
     src/collision/shape.c
@@ -70,6 +71,9 @@ target_link_libraries(test_circlevscircle PRIVATE fysics_engine SDL2)
 #rectvsrect
 add_executable(test_rectvsrect test/collision/rectvsrect/main.c)
 target_link_libraries(test_rectvsrect PRIVATE fysics_engine SDL2)
+#circlevsrect
+add_executable(test_circlevsrect test/collision/circlevsrect/main.c)
+target_link_libraries(test_circlevsrect PRIVATE fysics_engine SDL2)
 
 
 

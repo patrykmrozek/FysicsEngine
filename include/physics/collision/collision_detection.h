@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <physics/math/vector2.h>
+#include <physics/math/math.h>
 #include <physics/core/body.h>
 
 typedef struct {
