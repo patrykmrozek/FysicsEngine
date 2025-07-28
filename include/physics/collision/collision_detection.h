@@ -10,14 +10,4 @@ typedef struct {
     fyVec2 contact_point;
 } fyCollision;
 
-typedef struct fyAABB {
-    fyVec2 min; //bottom left corner
-    fyVec2 max; //top right corner
-} fyAABB;
-
-//AABB functions
-bool fyAABB_TestOverlap(fyAABB a, fyAABB b);
-fyAABB fyAABB_Circle(fyVec2 center, float radius);
-fyAABB fyAABB_Rectangle(fyVec2 center, float width, float height);
-
 #endif

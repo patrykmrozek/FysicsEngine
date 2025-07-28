@@ -1,5 +1,7 @@
 #include <physics/fysics.h>
-#include <physics/collision/collision_detection.h>
+#include <physics/collision/aabb.h>
+#include <physics/core/body.h>
+#include <physics/collision/shape.h>
 #include <SDL2/SDL.h>
 
 #define SCREEN_WIDTH 1000
@@ -48,13 +50,14 @@ int main() {
     const float WIDTH = 100.0f;
     const float HEIGHT = 70.0f;
     fyBody_SetRectangleCollider(body_r, WIDTH, HEIGHT);
-    
+
+    /*
     fyVec2 bcp = fyBody_GetPosition(body_c);
     printf("body_c pointer: %p\n\tposition: %f, %f\n", body_c, bcp.x, bcp.y);
 
     fyVec2 brp = fyBody_GetPosition(body_r); 
     printf("body_r pointer: %p\n\tposition: %f, %f\n", body_r, brp.x, brp.y);
-
+*/
 
     const float FIXED_DT = 1.0f / 60.0f;
     float accumulator = 0.0f;
@@ -91,7 +94,13 @@ int main() {
             2*RADIUS,
             2*RADIUS
         };
-        fyAABB c = fyAABB_Circle(body_c_pos, RADIUS);
+        
+        //fyAABB c = fyAABB_Circle(body_c_pos, RADIUS);
+        //printf("Cirlce AABB 1: min x, y: %f, %f - max x, y: %f, %f\n",
+        //       c.min.x, c.min.y, c.max.x, c.max.y);
+        fyAABB c = fyBody_GetAABB(body_c, body_c_pos);
+        //printf("Circle AABB 2: min x, y: %f, %f - max x, y: %f, %f\n",
+        //       c2.min.x, c2.min.y, c2.max.x, c2.max.y);
 
 
         fyBody_AddForce(body_r, -500.0f, 200.0f);
@@ -102,7 +111,8 @@ int main() {
             WIDTH,
             HEIGHT
         };
-        fyAABB r = fyAABB_Rectangle(body_r_pos, WIDTH, HEIGHT);
+        fyAABB r = fyBody_GetAABB(body_r, body_r_pos);
+        //fyAABB r = fyAABB_Rectangle(body_r_pos, WIDTH, HEIGHT);
 
         
         //clear

@@ -1,6 +1,7 @@
 # FysicsEngine
 
-Physics engine written in C with SDL for window configuration, GLAD & OpenGL for rendering, Nuklear for GUI.
+Physics engine written in C.
+Visual examples make with SDL.
 
 ## Progress as of 28/07/25
 ### AABB Collision Test

@@ -2,7 +2,8 @@
 #define FY_SHAPE_H
 
 #include <physics/math/vector2.h>
-#include <physics/collision/collision_detection.h>
+#include <physics/collision/aabb.h>
+
 
 typedef enum {
     FY_SHAPE_CIRCLE,
@@ -25,6 +26,5 @@ typedef struct fyShape {
     fyShapeData data;
 } fyShape;
 
-fyAABB fyShape_GetAABB(const fyShape* shape, fyVec2 position);
 
 #endif

@@ -17,5 +17,6 @@ typedef struct fyBody {
 } fyBody;
 
 
+fyAABB fyBody_GetAABB(fyBody* body, fyVec2 position);
 
 #endif

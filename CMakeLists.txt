@@ -27,6 +27,7 @@ file(GLOB PHYSICS_SOURCES
     src/core/world.c
     src/math/vector2.c
     src/collision/collision_detection.c
+    src/collision/aabb.c
     src/collision/shape.c
 )
 
