@@ -1,9 +1,12 @@
 #include <physics/collision/collision_detection.h>
 
 bool fyCollision_CircleVsCircle(fyBody* a, fyBody* b, fyCollisionInfo* output) {
-    float dist = fyVec2_Dist(a->position, b->position); //dist between centers
+    float dist = fyVec2_DistSquared(a->position, b->position); //dist between centers
     float sum_r = a->shape.data.circle.radius + b->shape.data.circle.radius; //sum radii 
-    return (dist <= sum_r);
+    
+    
+
+    return (dist <= sum_r*sum_r);
 }
 
 
@@ -25,9 +28,10 @@ bool fyCollision_CircleVsRect(fyBody* circle, fyBody* rect, fyCollisionInfo* inf
     float closest_x = fyMath_Clamp(circle->position.x, aabb_rect.min.x, aabb_rect.max.x);
     float closest_y = fyMath_Clamp(circle->position.y, aabb_rect.min.y, aabb_rect.max.y);
 
-    float dist = fyVec2_Dist(circle->position, (fyVec2){closest_x, closest_y});
+    float r = circle->shape.data.circle.radius;
+    float dist = fyVec2_DistSquared(circle->position, (fyVec2){closest_x, closest_y});
 
-    if (dist <= circle->shape.data.circle.radius) {
+    if (dist <= r*r) {
         return true; //collision
     }
     return false;

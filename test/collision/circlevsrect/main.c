@@ -13,8 +13,8 @@ void draw_circle(SDL_Renderer* renderer, fyBody* body) {
     float r = body->shape.data.circle.radius;
 	for (double x=pos.x-r; x<pos.x+r; x++) {
 		for (double y=pos.y-r; y<pos.y+r; y++) {
-            float distance = fyVec2_Dist(pos, (fyVec2){x, y});
-			if (distance < r) {
+            float distance = fyVec2_DistSquared(pos, (fyVec2){x, y});
+			if (distance < r*r) {
 				SDL_Rect pixel =(SDL_Rect){x, y, 1, 1};
 				SDL_RenderFillRect(renderer, &pixel);
 			}
