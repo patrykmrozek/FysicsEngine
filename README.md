@@ -1,7 +1,12 @@
 # FysicsEngine
-
-Physics engine written in C.
+Lightweight physics engine written in C with an encapsulated API.
 Visual examples made with SDL.
+
+## Features (In Development)
+- **Rigid Body Dynamics** 
+- **Collision Detection**
+- **Support for different Shapes**
+- **User-friendly API**
 
 ## Progress as of 28/07/25
 ### AABB Broadphase Collision Test
@@ -11,7 +16,14 @@ Visual examples made with SDL.
 ### Circle VS Circle Collision Test
 
 ![AABB Collision Test Demo](https://raw.githubusercontent.com/patrykmrozek/FysicsEngine/main/docs/static/videos/circlevscircle_test.gif)
+## TODO 
+- [ ] Rectangle vs Rectangle & Rectangle vs Circle collision detection
+- [ ] Collision resolution and response
+- [ ] Constraint system
+- [ ] Friction, restitution ...
+- [ ] Smooth Step system 
+- [ ] OpenGL rendering
+- [ ] Optimizations
 
 
-
-WIP
+*work in progress*
