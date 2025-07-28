@@ -13,7 +13,7 @@ fyVec2 fyBody_GetVelocity(fyBody* body) {
 }
 
 void fyBody_AddForce(fyBody* body, float x, float y) {
-    body->force = vec2_add(body->force, (fyVec2){x, y});
+    body->force = fyVec2_Add(body->force, (fyVec2){x, y});
 }
 
 void fyBody_SetCircleCollider(fyBody* body, float radius) {

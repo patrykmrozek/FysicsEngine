@@ -6,9 +6,9 @@ int main() {
     
     fyVec2 a = {100, 50};
     fyVec2 b = {75, 20};
-    fyVec2 c = vec2_add(a, b);
-    fyVec2 d = vec2_sub(a, b);
-    fyVec2 e = vec2_scale(a, 5);
+    fyVec2 c = fyVec2_Add(a, b);
+    fyVec2 d = fyVec2_Sub(a, b);
+    fyVec2 e = fyVec2_Scale(a, 5);
 
     printf("Addition: %f, %f\n", c.x, c.y);
     printf("Subtraction: %f, %f\n", d.x, d.y);

@@ -64,19 +64,19 @@ void fyWorld_Step(fyWorld* world, float delta_time) {
         fyBody* body = &world->bodies[i];
         if (body->is_active) {
             //f += m * g
-            body->force = vec2_add(body->force,
-                          vec2_scale(world->gravity, body->mass));
+            body->force = fyVec2_Add(body->force,
+                          fyVec2_Scale(world->gravity, body->mass));
 
             //a = F/m
-            fyVec2 acceleration = vec2_scale(body->force, 1.0f/body->mass);
+            fyVec2 acceleration = fyVec2_Scale(body->force, 1.0f/body->mass);
 
             //v += a * dt
-            body->velocity = vec2_add(body->velocity,
-                                      vec2_scale(acceleration, delta_time));
+            body->velocity = fyVec2_Add(body->velocity,
+                                      fyVec2_Scale(acceleration, delta_time));
 
             //x += v * dt
-            body->position = vec2_add(body->position,
-                                      vec2_scale(body->velocity, delta_time));
+            body->position = fyVec2_Add(body->position,
+                                      fyVec2_Scale(body->velocity, delta_time));
             
             body->force = (fyVec2){0, 0}; //reset net force
         }
