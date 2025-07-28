@@ -45,6 +45,7 @@ fyBody* fyWorld_CreateBody(fyWorld* world, float mass) {
             body->position = (fyVec2){0, 0};
             body->mass = mass;
             body->is_active = true;
+            body->force = (fyVec2){0, 0};
             world->body_count ++;
             return body;
         }

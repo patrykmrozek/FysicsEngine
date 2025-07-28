@@ -51,24 +51,18 @@ target_compile_options(fysics_engine PRIVATE ${SDL2_CFLAGS_OTHER})
 
 
 #examples
+#basic
+add_executable(example_basic examples/basic/main.c)
+target_link_libraries(example_basic PRIVATE fysics_engine)
+#sdl
+add_executable(example_sdl examples/sdl/main.c)
+target_link_libraries(example_sdl PRIVATE fysics_engine SDL2)
 
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/examples/basic/main.c")
-    add_executable(basic_example examples/basic/main.c)
-    target_link_libraries(basic_example PRIVATE fysics_engine)
-    #output directory
-    set_target_properties(basic_example PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/examples"
-    )
-endif()
 
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/examples/sdl/main.c")
-    add_executable(sdl_example examples/sdl/main.c)
-    target_link_libraries(sdl_example PRIVATE fysics_engine SDL2)
-    #output directory
-    set_target_properties(sdl_example PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/examples"
-    )
-endif()
+#tests
+#fyAABB
+add_executable(test_fyAABB test/fyAABB/main.c)
+target_link_libraries(test_fyAABB PRIVATE fysics_engine SDL2)
 
 
 

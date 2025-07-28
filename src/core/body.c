@@ -21,7 +21,7 @@ void fyBody_SetCircleCollider(fyBody* body, float radius) {
     body->shape.data.circle.radius = radius;
 }
 
-void fyBody_Set_RectangleCollider(fyBody* body, float width, float height) {
+void fyBody_SetRectangleCollider(fyBody* body, float width, float height) {
     body->shape.type = FY_SHAPE_RECTANGLE;
     body->shape.data.rectangle.width = width;
     body->shape.data.rectangle.height = height;

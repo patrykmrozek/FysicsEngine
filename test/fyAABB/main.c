@@ -1,0 +1,122 @@
+#include <physics/fysics.h>
+#include <physics/collision/collision_detection.h>
+#include <SDL2/SDL.h>
+
+#define SCREEN_WIDTH 1000
+#define SCREEN_HEIGHT 800
+
+int main() {
+    printf("FYAABB TEST\n");
+
+    SDL_Init(SDL_INIT_VIDEO);
+
+    SDL_Window* window = SDL_CreateWindow(
+        "TEST - fyAABB",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        SCREEN_WIDTH,
+        SCREEN_HEIGHT,
+        SDL_WINDOW_SHOWN
+    );
+
+    SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    SDL_Renderer* renderer = SDL_GetRenderer(window);
+
+    //world setup
+    fyWorldConfig config;
+    config.max_bodies = 2;
+    fyWorld* world = fyWorld_Create(&config);
+    fyBody* body_c = fyWorld_CreateBody(world, 50.0f);
+    fyBody* body_r = fyWorld_CreateBody(world, 90.0f);
+    
+    //setting up 'circle' body
+    fyBody_SetPosition(body_c, 200.0f, 200.0f);
+    const float RADIUS = 30.0f;
+    fyBody_SetCircleCollider(body_c, RADIUS);
+    
+    //setting up 'rectangle' body
+    fyBody_SetPosition(body_r, 500.0f, 100.0f);
+    const float WIDTH = 100.0f;
+    const float HEIGHT = 70.0f;
+    fyBody_SetRectangleCollider(body_r, WIDTH, HEIGHT);
+
+
+    const float FIXED_DT = 1.0f / 60.0f;
+    float accumulator = 0.0f;
+    Uint32 prev_time = SDL_GetTicks();
+
+    SDL_RaiseWindow(window);
+    SDL_PumpEvents();
+    SDL_Event event;
+    int running = 1;
+    while (running) {
+
+        Uint32 curr_time = SDL_GetTicks();
+        accumulator += (curr_time - prev_time) / 1000.0f;
+        prev_time = curr_time;
+        
+        if (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                running = 0;
+            }
+        }
+       
+        while (accumulator >= FIXED_DT) {
+            fyWorld_Step(world, FIXED_DT);
+            accumulator -= FIXED_DT;
+        }
+
+
+        fyBody_AddForce(body_c, 200.0f, -50.0f);
+        fyVec2 body_c_pos = fyBody_GetPosition(body_c);
+        //need to offset by radius as DrawRect draws from top left corner
+        SDL_Rect rect_c = {
+            body_c_pos.x-RADIUS,
+            body_c_pos.y-RADIUS,
+            2*RADIUS,
+            2*RADIUS
+        };
+        fyAABB c = fyAABB_Circle(body_c_pos, RADIUS);
+
+
+        fyBody_AddForce(body_r, -100.0f, 200.0f);
+        fyVec2 body_r_pos = fyBody_GetPosition(body_r);
+        SDL_Rect rect_r = {
+            body_r_pos.x - WIDTH/2,
+            body_r_pos.y - HEIGHT/2,
+            WIDTH,
+            HEIGHT
+        };
+        fyAABB r = fyAABB_Rectangle(body_r_pos, WIDTH, HEIGHT);
+
+        
+        //clear
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+        //draw rects
+        //drawing rectangle instead of circle because the AABB is just a rect 
+        //encompassing a circle
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_RenderFillRect(renderer, &rect_c);
+        SDL_RenderFillRect(renderer, &rect_r);
+        //draw red line from min to max
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+        SDL_RenderDrawLine(renderer, c.min.x, c.min.y, c.max.x, c.max.y);
+        SDL_RenderDrawLine(renderer, r.min.x, r.min.y, r.max.x, r.max.y);
+
+
+        SDL_RenderPresent(renderer);
+
+        
+    }
+
+    fyWorld_Destroy(world);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+
+
+}
