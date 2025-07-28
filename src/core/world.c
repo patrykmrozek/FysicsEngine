@@ -38,24 +38,29 @@ void fyWorld_Destroy(fyWorld* world) {
 }
 
 fyBody* fyWorld_CreateBody(fyWorld* world, float mass) {
+    if (world->body_count >= world->max_bodies) {
+        return NULL;
+    }
+
     for (int i = 0; i < world->max_bodies; i++) {
         fyBody* body = &world->bodies[i];
-        if (!body[i].is_active) {
+        if (!body->is_active) {
             //initialize body
-            body->position = (fyVec2){0, 0};
-            body->mass = mass;
             body->is_active = true;
+            body->position = (fyVec2){0, 0};
+            body->velocity = (fyVec2){0, 0};
             body->force = (fyVec2){0, 0};
+            body->mass = mass;
             world->body_count ++;
             return body;
-        }
+        };
     }
     return NULL;
 }
 
 void fyWorld_Step(fyWorld* world, float delta_time) {
     for (int i = 0; i < world->max_bodies; i++) {
-        printf("DELTA TIME: %f\n", delta_time);
+        //printf("DELTA TIME: %f\n", delta_time);
         fyBody* body = &world->bodies[i];
         if (body->is_active) {
             //f += m * g

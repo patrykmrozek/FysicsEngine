@@ -18,10 +18,18 @@ int main() {
         SCREEN_HEIGHT,
         SDL_WINDOW_SHOWN
     );
+    if (!window) {
+        printf("CREATEWINDOW ERROR: %s\n", SDL_GetError());
+        return 1;
+    }
 
     SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     SDL_Renderer* renderer = SDL_GetRenderer(window);
+    if (!renderer) {
+        printf("GETRENDERER ERROR: %s\n", SDL_GetError());
+        return 1;
+    }
 
     //world setup
     fyWorldConfig config;
@@ -40,6 +48,12 @@ int main() {
     const float WIDTH = 100.0f;
     const float HEIGHT = 70.0f;
     fyBody_SetRectangleCollider(body_r, WIDTH, HEIGHT);
+    
+    fyVec2 bcp = fyBody_GetPosition(body_c);
+    printf("body_c pointer: %p\n\tposition: %f, %f\n", body_c, bcp.x, bcp.y);
+
+    fyVec2 brp = fyBody_GetPosition(body_r); 
+    printf("body_r pointer: %p\n\tposition: %f, %f\n", body_r, brp.x, brp.y);
 
 
     const float FIXED_DT = 1.0f / 60.0f;
@@ -68,7 +82,7 @@ int main() {
         }
 
 
-        fyBody_AddForce(body_c, 200.0f, -50.0f);
+        fyBody_AddForce(body_c, 400.0f, -50.0f);
         fyVec2 body_c_pos = fyBody_GetPosition(body_c);
         //need to offset by radius as DrawRect draws from top left corner
         SDL_Rect rect_c = {
@@ -80,7 +94,7 @@ int main() {
         fyAABB c = fyAABB_Circle(body_c_pos, RADIUS);
 
 
-        fyBody_AddForce(body_r, -100.0f, 200.0f);
+        fyBody_AddForce(body_r, -500.0f, 200.0f);
         fyVec2 body_r_pos = fyBody_GetPosition(body_r);
         SDL_Rect rect_r = {
             body_r_pos.x - WIDTH/2,
@@ -97,7 +111,11 @@ int main() {
         //draw rects
         //drawing rectangle instead of circle because the AABB is just a rect 
         //encompassing a circle
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        if (fyAABB_TestOverlap(c, r)) {
+            SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+        } else {
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        }
         SDL_RenderFillRect(renderer, &rect_c);
         SDL_RenderFillRect(renderer, &rect_r);
         //draw red line from min to max
