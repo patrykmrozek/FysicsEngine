@@ -28,13 +28,13 @@ void fyBody_SetRectangleCollider(fyBody* body, float width, float height) {
 }
 
 //calls different AABB function depending on the shape
-fyAABB fyBody_GetAABB(fyBody* body, fyVec2 position) {
+fyAABB fyBody_GetAABB(fyBody* body) {
     fyShape* shape = &body->shape;
     switch (shape->type) {
         case FY_SHAPE_CIRCLE:
-            return fyAABB_Circle(position, shape->data.circle.radius);
+            return fyAABB_Circle(body->position, shape->data.circle.radius);
         case FY_SHAPE_RECTANGLE:
-            return fyAABB_Rectangle(position, shape->data.rectangle.width,
+            return fyAABB_Rectangle(body->position, shape->data.rectangle.width,
                                     shape->data.rectangle.height);
     }
 }

@@ -64,6 +64,9 @@ target_link_libraries(example_sdl PRIVATE fysics_engine SDL2)
 #fyAABB
 add_executable(test_fyAABB test/fyAABB/main.c)
 target_link_libraries(test_fyAABB PRIVATE fysics_engine SDL2)
+#circlevscircle
+add_executable(test_circlevscircle test/collision/circlevscircle/main.c)
+target_link_libraries(test_circlevscircle PRIVATE fysics_engine SDL2)
 
 
 

@@ -28,4 +28,7 @@ float vec2_cross(fyVec2 v1, fyVec2 v2) {
     return (v1.x * v2.y) - (v1.y * v2.x);
 }
 
+float vec2_dist(fyVec2 v1, fyVec2 v2) {
+    return sqrt((v1.x - v2.x)*(v1.x - v2.x) + (v1.y - v2.y)*(v1.y - v2.y));
+}
 

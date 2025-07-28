@@ -1,7 +1,7 @@
 # FysicsEngine
 
 Physics engine written in C.
-Visual examples make with SDL.
+Visual examples made with SDL.
 
 ## Progress as of 28/07/25
 ### AABB Collision Test
